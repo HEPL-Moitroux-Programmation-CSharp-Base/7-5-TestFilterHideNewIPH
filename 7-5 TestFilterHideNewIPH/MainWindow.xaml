@@ -1,0 +1,33 @@
+﻿<Window x:Class="WPFTestDatagrid.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFTestDatagrid"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <CollectionViewSource x:Key="FilteredItems" Source="{Binding}" Filter="Contains">
+        </CollectionViewSource>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0" >
+            <ListBox x:Name="LBbase" ItemsSource="{Binding Source={StaticResource FilteredItems}}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="{Binding Path=Prenom}"></Label>
+                            <Label Content="{Binding Path=Nom}"></Label>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <ComboBox x:Name="Combobase" ItemsSource="{Binding Source={StaticResource FilteredItems}}"/>
+        </StackPanel>
+        <DataGrid x:Name="DGbase" Grid.Column="1" ItemsSource="{Binding}"/>
+    </Grid>
+</Window>
